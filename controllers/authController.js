@@ -1,6 +1,6 @@
-import User from '../../../HealthLink-360-Backend/models/User.js';
+import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
-import admin from '../config/firebaseAdmin.js'; 
+import admin from '../config/firebaseAdmin.js';
 
 const generateToken = (userId) => {
     return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
@@ -209,10 +209,10 @@ export const googleLogin = async (req, res) => {
                 email,
                 password: `google_auth_placeholder_${Date.now()}_${Math.random().toString(36).slice(2)}`,
                 displayName: name || email.split('@')[0],
-                role: role || 'patient', 
+                role: role || 'patient',
                 photoURL: picture || null,
                 authProvider: 'google',
-                firebaseUid: uid 
+                firebaseUid: uid
             });
         } else {
             if (user.authProvider !== 'google') {

@@ -18,19 +18,17 @@ app.use(cors({
 
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log('✅ MongoDB Connected Successfully');
         
-        // Start server only after a successful DB connection
         app.listen(PORT, () => {
             console.log(`🚀 Server running on port ${PORT}`);
         });
     })
     .catch((err) => {
         console.error('❌ MongoDB Connection Error:', err);
-        process.exit(1); // Exit the process on connection failure
+        process.exit(1); 
     });
 
 app.use('/api/auth', authRoutes);
@@ -39,7 +37,6 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({
