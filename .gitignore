@@ -109,3 +109,8 @@ dist
 
 # Mac OS
 .DS_Store
+
+
+node_modules/
+.vscode/
+.env
